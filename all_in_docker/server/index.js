@@ -2,18 +2,20 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+require("dotenv").config();
 
 app.use(cors({
-  origin: '*'
+  origin: process.env.CORS_ORIGIN || '*'
 }));
 
 const db = mysql.createPool({
-  port: 3306,
-  host: "localhost",
-  user: "root",
-  password: "mauFJcuf5dhRMQrjj",
-  database: "employeeSystem",
+  port: process.env.PORT || 3306,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
+
 
 app.use(express.json());
 
